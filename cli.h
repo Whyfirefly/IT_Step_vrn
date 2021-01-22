@@ -84,3 +84,62 @@ void InsertStudent(vector<Student>& students)
 
     students.push_back(temp);
 }
+
+//6.Экспорт в файл
+string ExportInFile(vector<Student> students)
+{
+    Student student;
+    ofstream file;
+    file.open("InformationOfStudents.csv", ios_base::out);
+    if(file.is_open()) {
+       for (Student student : students) {
+           file << "Name: " << student.firstName << ";" << endl
+                << "Surname: " << student.lastName << ";" << endl
+                << "Sex: " << SexToString(student.sex) << ";" << endl
+                << "Date of birthday: " << student.birthday.ToString() << ";" << endl
+                << "Faculty: " << FacultyToString(student.faculty) << ";" << endl
+                << "Group: " << student.group << ";" << endl
+                << "Does student study? - " << student.IsStudyToString() << ";" << endl << endl;
+       }
+    } else {
+        cout << "File wasn't open" << endl;
+    }
+    file.close();
+}
+
+//7.Импорт из файла
+string ImportFromFile(vector<Student> students)
+{
+    Student student;
+    string birthday = student.birthday.ToString();
+    string sex = SexToString(student.sex);
+    string faculty = FacultyToString(student.faculty);
+    string isStudy = student.IsStudyToString();
+
+    ifstream file ("InformationOfStudents.csv");
+    if(file.is_open()) {
+        for (Student student : students) {
+            getline (file, student.firstName,';');
+            getline (file, student.lastName, ';');
+            getline (file, sex, ';');
+            getline (file, birthday, ';');
+            getline (file, faculty, ';');
+            getline (file, student.group, ';');
+            getline (file, isStudy, ';');
+        }
+    } else {
+        cout << "File wasn't open" << endl;
+    }
+    file.close();
+
+    for (Student student : students) {
+    cout << "Name: " << student.firstName << endl
+         << "Surname: " << student.lastName
+         << sex
+         << birthday
+         << faculty << endl
+         << "Group: " << student.group
+         << isStudy << endl << endl;
+    }
+
+}

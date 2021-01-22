@@ -45,8 +45,12 @@ int main()
             case 5:
                 break;
             case 6:
+                ExportInFile(students);
+                cout << "Check the file named 'InformationOfStudents.csv' , please." << endl;
                 break;
             case 7:
+                cout << endl << "There is the next information in file 'InformationOfStudents.csv':" << endl << endl;
+                ImportFromFile(students);
                 break;
             case 0:
                 flagExit = true;

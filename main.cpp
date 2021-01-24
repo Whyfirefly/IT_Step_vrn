@@ -50,7 +50,8 @@ int main()
                 break;
             case 7:
                 cout << endl << "There is the next information in file 'InformationOfStudents.csv':" << endl << endl;
-                ImportFromFile(students);
+                Student student1 = GetStudentFromFile("InformationOfStudents.csv");
+                ShowStudentFromFile (student);
                 break;
             case 0:
                 flagExit = true;

@@ -93,12 +93,12 @@ string ExportInFile(vector<Student> students)
     file.open("InformationOfStudents.csv", ios_base::out);
     if(file.is_open()) {
        for (Student student : students) {
-           file << "Name: " << student.firstName << ";" << endl
-                << "Surname: " << student.lastName << ";" << endl
-                << "Sex: " << SexToString(student.sex) << ";" << endl
-                << "Date of birthday: " << student.birthday.ToString() << ";" << endl
-                << "Faculty: " << FacultyToString(student.faculty) << ";" << endl
-                << "Group: " << student.group << ";" << endl
+           file << "Name: " << student.firstName << ";"
+                << "Surname: " << student.lastName << ";"
+                << "Sex: " << SexToString(student.sex) << ";"
+                << "Date of birthday: " << student.birthday.ToString() << ";"
+                << "Faculty: " << FacultyToString(student.faculty) << ";"
+                << "Group: " << student.group << ";"
                 << "Does student study? - " << student.IsStudyToString() << ";" << endl << endl;
        }
     } else {
@@ -108,38 +108,40 @@ string ExportInFile(vector<Student> students)
 }
 
 //7.Импорт из файла
-string ImportFromFile(vector<Student> students)
-{
-    Student student;
-    string birthday = student.birthday.ToString();
-    string sex = SexToString(student.sex);
-    string faculty = FacultyToString(student.faculty);
-    string isStudy = student.IsStudyToString();
+Student GetStudentFromFile (string path) {
+    Student temp;
+    string birthday = temp.birthday.ToString();
+    string sex = SexToString(temp.sex);
+    string faculty = FacultyToString(temp.faculty);
+    string isStudy = temp.IsStudyToString();
 
-    ifstream file ("InformationOfStudents.csv");
-    if(file.is_open()) {
-        for (Student student : students) {
-            getline (file, student.firstName,';');
-            getline (file, student.lastName, ';');
-            getline (file, sex, ';');
-            getline (file, birthday, ';');
-            getline (file, faculty, ';');
-            getline (file, student.group, ';');
-            getline (file, isStudy, ';');
-        }
+    ifstream file(path);
+    if (file.is_open()) {
+        getline(file, temp.firstName, ';');
+        getline(file, temp.lastName, ';');
+        getline(file, sex, ';');
+        getline(file, birthday, ';');
+        getline(file, faculty, ';');
+        getline(file, temp.group, ';');
+        getline(file, isStudy, ';');
+
     } else {
         cout << "File wasn't open" << endl;
     }
     file.close();
+    return temp;
+}
 
-    for (Student student : students) {
-    cout << "Name: " << student.firstName << endl
-         << "Surname: " << student.lastName
-         << sex
-         << birthday
-         << faculty << endl
-         << "Group: " << student.group
-         << isStudy << endl << endl;
-    }
-
+void ShowStudentFromFile (Student student)
+{
+    cout << endl;
+    cout << "++++++++Information about student++++++++" << endl;
+    cout << student.firstName << endl
+         << student.lastName
+         << SexToString(student.sex)
+         << student.birthday.ToString()
+         << FacultyToString(student.faculty)
+         << student.group
+         << student.IsStudyToString() << endl;
+    cout << "+++++++++++++++++++++++++++++++++++++++++";
 }

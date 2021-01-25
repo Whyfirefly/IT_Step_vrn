@@ -131,17 +131,3 @@ Student GetStudentFromFile (string path) {
     file.close();
     return temp;
 }
-
-void ShowStudentFromFile (Student student)
-{
-    cout << endl;
-    cout << "++++++++Information about student++++++++" << endl;
-    cout << student.firstName << endl
-         << student.lastName
-         << SexToString(student.sex)
-         << student.birthday.ToString()
-         << FacultyToString(student.faculty)
-         << student.group
-         << student.IsStudyToString() << endl;
-    cout << "+++++++++++++++++++++++++++++++++++++++++";
-}
